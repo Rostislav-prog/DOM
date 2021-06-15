@@ -49,3 +49,41 @@ function fuckingBoard() { // три дня я колупал свой мозг
 }
 
 fuckingBoard()
+
+
+
+
+
+
+let htmlBasket = document.getElementById("basket"); // присваеваем блоку с id=basket переменную htmlBasket
+
+
+let basket = [ // массив - типо корзина в магазине
+
+    { name: 'футболка', size: 'm', model: 'hjr5', color: 'black', price: 110 },
+    { name: 'носки', size: 'm', model: 'hjr5', color: 'black', price: 200 },
+    { name: 'трусы', size: 'm', model: 'hjr5', color: 'black', price: 500 },
+    { name: 'куртка', size: 'm', model: 'hjr5', color: 'black', price: 10000 },
+
+];
+
+
+function countBasketPrice(arr) { // функция складывает цены товаров (price) из предоставленной корзины - массива
+    let sum = 0;
+    for (let num of arr) {
+
+        sum += num.price;
+
+    }
+    return sum; // и отдаёт сумму
+
+}
+
+
+if (countBasketPrice(basket) == 0) { //если сумма цен товаров = 0
+    htmlBasket.innerHTML = "Корзина пуста."
+} else { // иначе 
+    htmlBasket.innerHTML = "В корзине: " + basket.length + " товаров на сумму " + countBasketPrice(basket) + " рублей."; // записываем в перемкнную значение и выводим в html
+}
+
+
