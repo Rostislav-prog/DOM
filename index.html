@@ -152,6 +152,42 @@
             display: flex;
             justify-content: center;
         }
+
+        .popup {
+            display: none;
+        }
+
+        .popupopen {
+            width: 80vw;
+            height: 50vh;
+            border: 2px solid;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: white;
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .wrap {
+            text-align: center;
+        }
+
+        #basketOpen {
+            cursor: pointer;
+        }
+
+        #closePopupBtn {
+            cursor: pointer;
+        }
+
+        #section-2,
+        #section-3 {
+            display: none;
+        }
     </style>
 </head>
 
@@ -166,6 +202,10 @@
     <div id="basket">
 
     </div>
+    <div class="wrap">
+        <button id="basketOpen">В корзину</button>
+    </div>
+
 
     <div class="flex">
 
@@ -222,6 +262,29 @@
                 Operandi.</p>
             <h3 class="product_price">$52.00</h3>
         </div>
+
+    </div>
+
+    <div id="popup" class="popup">
+        <button id="closePopupBtn">X</button>
+        <section id="section-1">
+            <h2>Корзина</h2>
+            <div id="cart-details"></div>
+            <div id="cart-details2"></div>
+
+        </section>
+
+        <section id="section-2">
+            <h2>Адрес доставки</h2>
+
+        </section>
+
+        <section id="section-3">
+            <h2>Комментарий</h2>
+
+        </section>
+
+        <button id="nextSectionBtn">Далее</button>
 
     </div>
 

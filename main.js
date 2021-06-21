@@ -68,7 +68,7 @@ let products = [ // массив - типо товар в магазине
 
 ];
 
-console.log();
+
 
 function productsSearchForId(i) { // функция выполняет поиск значений в массиве products, если совпадает, отдаёт объект, где хранилось значение
     for (yy = 0; yy < products.length; yy++) {
@@ -82,12 +82,64 @@ function productsSearchForId(i) { // функция выполняет поис�
 }
 
 
+
+
 let htmlBasket = document.getElementById("basket"); // присваеваем блоку с id=basket переменную htmlBasket
 
 
 let basket = [ // массив - типо корзина в магазинe
 
+
 ];
+
+function basketDeleteForId(i) { // функция выполняет поиск значений в массиве basket, если совпадает, удаляет обьект
+    for (yy = 0; yy < basket.length; yy++) {
+        let obg = basket[yy];
+        for (let key in basket[yy]) {
+            if (i == obg[key]) {
+
+                basket.splice(obg, 1);
+                console.log('удалили');
+                console.log(basket);
+            }
+        }
+    }
+}
+
+function namePrice() { // отрисовывает в корзине товары при открытии
+    for (i = 0; i < basket.length; i++) {
+        let { id, name, price } = basket[i];
+        let newEl = document.createElement('div');
+        cartDetails2.appendChild(newEl);
+        newEl.innerHTML = "Наименование : " + name + " ,  цена " + price + " руб."
+        cartDetails2.appendChild(newEl);
+        let button = document.createElement('button');
+        cartDetails2.appendChild(button);
+        button.setAttribute('id', id);
+        button.innerHTML = "Удалить";
+        button.addEventListener('click', function () {
+            console.log(this.id);
+            delid = Number(this.id);
+            basketDeleteForId(delid);
+            newEl.innerHTML = '';
+            button.style.display = 'none';
+            if (countBasketPrice(basket) == 0) { //если сумма цен товаров = 0
+                htmlBasket.innerHTML = "Корзина пуста."
+                cartDetails.innerHTML = "Корзина пуста."
+            } else { // иначе 
+                htmlBasket.innerHTML = "В корзине: " + basket.length + " товаров на сумму " + countBasketPrice(basket) + " рублей."; // записываем в перемкнную значение и выводим в html
+                cartDetails.innerHTML = "В корзине: " + basket.length + " товаров на сумму " + countBasketPrice(basket) + " рублей.";
+            }
+
+        })
+
+    }
+}
+
+
+function namePricReset() { // чистит html корзинs при зарытии
+    cartDetails2.innerHTML = '';
+}
 
 
 function countBasketPrice(arr) { // функция складывает цены товаров (price) из предоставленной корзины - массива
@@ -101,21 +153,67 @@ function countBasketPrice(arr) { // функция складывает цены
 htmlBasket.innerHTML = "Корзина пуста."
 
 let product = document.querySelectorAll('.superclass');
-console.log(product);
 for (i = 0; i < product.length; i++) { // перебор всех блоков с классом superclass
     product[i].addEventListener('click', function () {
         let id = (this.id); // находим переменную html блоке 
         let obgid = productsSearchForId(id); // находим обьект с этой переменной в массиве products
-        console.log(obgid);
         basket.push(obgid); // добавляем найденный массив в корзину
         console.log(basket);
         if (countBasketPrice(basket) == 0) { //если сумма цен товаров = 0
             htmlBasket.innerHTML = "Корзина пуста."
         } else { // иначе 
             htmlBasket.innerHTML = "В корзине: " + basket.length + " товаров на сумму " + countBasketPrice(basket) + " рублей."; // записываем в перемкнную значение и выводим в html
+            cartDetails.innerHTML = "В корзине: " + basket.length + " товаров на сумму " + countBasketPrice(basket) + " рублей.";
         }
-
     })
+
 }
+
+
+let basketOpen = document.getElementById("basketOpen"); // кнопке "в корзину" присвоим переменную
+let popup = document.getElementById("popup");// находим блок popup
+let closePopupBtn = document.getElementById("closePopupBtn"); // кнопка, закрывающая блок popup
+let cartDetails = document.getElementById("cart-details"); // блок в корзине
+let cartDetails2 = document.getElementById("cart-details2"); // блок в корзине
+let section1 = document.getElementById("section-1");
+let section2 = document.getElementById("section-2");
+let section3 = document.getElementById("section-3");
+let nextSectionBtn = document.getElementById("nextSectionBtn");
+
+function devideArray(x) {
+    for (let key in x) {
+        let name = (this.name);
+        return name;
+    }
+}
+
+
+basketOpen.addEventListener('click', function () { // при клике на кнопку "в корзину" у переменной popup меняется класс
+    popup.classList.add('popupopen');
+    popup.classList.remove('popup');
+
+})
+
+basketOpen.addEventListener('click', namePrice); // отрисовываем товары в корзине
+
+closePopupBtn.addEventListener('click', function () {
+    popup.classList.add('popup');
+    popup.classList.remove('popupopen');
+})
+
+closePopupBtn.addEventListener('click', namePricReset);
+
+let secarr = [section1, section2, section3]; // массив из секций
+let k = 0; // переменная для первой секции массива
+nextSectionBtn.addEventListener('click', function () { // кнопка для переключения между секциями
+    for (i = 0; i < secarr.length; i++) {
+        secarr[i].style.display = 'none';
+    }
+    secarr[k].style.display = 'block';
+    k++;
+    if (k > 2) {
+        k = 0;
+    }
+})
 
 
