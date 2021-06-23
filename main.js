@@ -217,29 +217,32 @@ nextSectionBtn.addEventListener('click', function () { // кнопка для п
 
 
 
-if (!("a" in window)) {
-    var a = 1;
-}
-alert(a); // возможно выведет 1, т.к. замыкание для var - весь документ, а для let a = 1;  - будет ошибка
+// if (!("a" in window)) {
+//     var a = 1;
+// }
+// alert(a); // возможно выведет 1, т.к. замыкание для var - весь документ, а для let a = 1;  - будет ошибка
 
-var b = function a(x) {
-    x && a(--x);
-};
-alert(a);// отдаст функцию a
+// var b = function a(x) {
+//     x && a(--x);
+// };
+// alert(a);// отдаст функцию a
 
-function a(x) {
-    return x * 2;
-}
-var a;
-alert(a);// отдаст x * 2, переменной a ничего не задано
+// function a(x) {
+//     return x * 2;
+// }
+// var a;
+// alert(a);// отдаст x * 2, переменной a ничего не задано
 
-function b(x, y, a) {
-    arguments[2] = 10;
-    alert(a);// отдаст 10   - a принимает значение 3, но в теле функции меняется на 10
-}
-b(1, 2, 3);
+// function b(x, y, a) {
+//     arguments[2] = 10;
+//     alert(a);// отдаст 10   - a принимает значение 3, но в теле функции меняется на 10
+// }
+// b(1, 2, 3);
 
-function a() {
-    alert(this); // функция a вызывается в контексте null, this будет равен null (я так думаю)
-}
-a.call(null);
+// function a() {
+//     alert(this); // функция a вызывается в контексте null, this будет равен null (я так думаю)
+// }
+// a.call(null);
+
+
+
